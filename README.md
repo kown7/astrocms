@@ -1,6 +1,8 @@
-# Orbit — Astro CMS prototype
+# Astro CMS UX mock
 
-An interactive front-end mock for a browser-based workspace for Astro repositories. The current UI uses sample data only; repository access, Git operations, browser storage, file uploads, and site preview are not connected.
+An interactive mock of the proposed browser-based Astro content editor. Open `/admin/` to explore the Menus, Blog posts, Content, and Commit history flows.
+
+The current UI uses sample data. Editing, local commits, the embedded Git repository, and ZIP export are simulated only; no files are changed and no Git or remote requests are made.
 
 ## Run locally
 
@@ -9,15 +11,8 @@ Requires Node.js `>=22.23.4`.
 ```sh
 npm install
 npm run dev
-npm run build
 ```
 
-The production build is written to `docs/`.
+Open `http://localhost:4321/admin/`.
 
-## Prototype surfaces
-
-- Overview, pages, repository files, media, Git changes, activity, and settings.
-- Sample code editor, diff review, repository connection dialog, and site preview.
-- UI actions identify themselves as mock interactions and do not send Git requests.
-
-The mock is built with Astro and native browser JavaScript; no UI framework is required.
+`npm run build` writes the static site to the Git-ignored `dist/` folder. GitHub Actions builds with `ASTRO_BASE=/astrocms` and deploys `dist/` to Pages on pushes to `main`; set the repository’s Pages source to **GitHub Actions**.
