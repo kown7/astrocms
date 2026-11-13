@@ -5,3 +5,6 @@ description: A first note from this small corner of the web.
 ---
 
 This journal is a place for updates, ideas, and useful notes. Thanks for stopping by.
+
+
+Pi pa po, nerdy nörd!
