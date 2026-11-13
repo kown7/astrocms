@@ -1,0 +1,22 @@
+---
+import { getEntry } from 'astro:content';
+
+const menu = await getEntry('menus', 'main');
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const menuHref = (href: string) => href.startsWith('/') && !href.startsWith('//') ? `${baseUrl}${href.slice(1)}` : href;
+---
+<header>
+	<a class="brand" href={baseUrl}>A Small Site</a>
+	{menu && (
+		<nav aria-label={menu.data.title}>
+			{menu.data.items.map((item) => <a href={menuHref(item.href)}>{item.label}</a>)}
+		</nav>
+	)}
+</header>
+
+<style>
+	header { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 1.25rem max(1.5rem, calc((100% - 58rem) / 2)); border-bottom: 1px solid #e5e7eb; }
+	.brand { color: #172033; font-weight: 700; text-decoration: none; }
+	nav { display: flex; gap: 1rem; }
+	nav a { color: #475569; text-decoration: none; }
+</style>

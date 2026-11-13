@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# generated public Git snapshot
+public/admin/base-git.zip
+public/admin/snapshot.json

@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts
+    .filter(({ data }) => !data.draft)
+    .map((post) => ({ params: { slug: post.data.slug ?? post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+---
+<Layout title={`${post.data.title} | A Small Site`}>
+	<main>
+		<article>
+			<a href={`${baseUrl}journal/`}>← Journal</a>
+			<h1>{post.data.title}</h1>
+			<time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('en', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+			{post.data.description && <p class="description">{post.data.description}</p>}
+			<div class="content"><Content /></div>
+		</article>
+	</main>
+</Layout>
+<style>
+	main { max-width: 46rem; margin: 0 auto; padding: 3rem 1.5rem; color: #172033; font-family: system-ui, sans-serif; line-height: 1.7; }
+	h1 { line-height: 1.1; font-size: clamp(2.4rem, 7vw, 4rem); margin-bottom: .5rem; }
+	time, .description { color: #64748b; }
+	.content { margin-top: 2rem; }
+	main a { color: #334e8a; }
+</style>

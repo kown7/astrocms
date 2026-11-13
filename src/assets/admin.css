@@ -78,10 +78,10 @@ button:disabled { opacity: .5; cursor: not-allowed; }
 .button-secondary { color: #545a68; border-color: #e1e4ea; background: #fff; }
 .button-secondary:hover { color: #574fc6; border-color: #cfccf4; background: #fbfaff; }
 .button-small { height: 29px; padding: 0 9px; font-size: 9px; }
-.prototype-banner { min-height: 37px; padding: 7px 34px; display: flex; align-items: center; gap: 9px; color: #68639f; background: #f0efff; border-bottom: 1px solid #e3e1ff; font-size: 9px; }
-.mock-pill { padding: 4px 6px; border-radius: 4px; color: #5952bf; background: #e2e0ff; font-size: 7px; font-weight: 800; letter-spacing: .55px; white-space: nowrap; }
-.prototype-banner > span:nth-child(2) { flex: 1; }
-.prototype-banner button { padding: 3px 0; border: 0; color: #5d56c5; background: transparent; cursor: pointer; font-size: 9px; font-weight: 700; white-space: nowrap; }
+.local-git-banner { min-height: 37px; padding: 7px 34px; display: flex; align-items: center; gap: 9px; color: #68639f; background: #f0efff; border-bottom: 1px solid #e3e1ff; font-size: 9px; }
+.status-pill { padding: 4px 6px; border-radius: 4px; color: #5952bf; background: #e2e0ff; font-size: 7px; font-weight: 800; letter-spacing: .55px; white-space: nowrap; }
+.local-git-banner > span:nth-child(2) { flex: 1; }
+.local-git-banner button { padding: 3px 0; border: 0; color: #5d56c5; background: transparent; cursor: pointer; font-size: 9px; font-weight: 700; white-space: nowrap; }
 .page-body { width: min(1360px, 100%); flex: 1; margin: 0 auto; padding: 30px 34px 26px; }
 .view-screen { animation: screen-enter .16s ease-out; }
 @keyframes screen-enter { from { opacity: .72; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
@@ -214,7 +214,7 @@ h3 { margin: 0; color: #343947; font-size: 11px; letter-spacing: -.1px; }
 .history-header { min-height: 63px; padding: 12px 15px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #eef0f3; }
 .history-header .eyebrow { margin-bottom: 4px; }
 .history-header h2 { font-size: 12px; }
-.mock-label { color: #6b64cb; background: #f0efff; padding: 4px 6px; border-radius: 4px; font-size: 7px; font-weight: 700; letter-spacing: .6px; }
+.worktree-label { color: #6b64cb; background: #f0efff; padding: 4px 6px; border-radius: 4px; font-size: 7px; font-weight: 700; letter-spacing: .6px; }
 .history-list { padding: 0 15px; }
 .history-entry { min-height: 81px; display: grid; grid-template-columns: 17px minmax(0, 1fr) 1px; gap: 11px; position: relative; padding-top: 16px; }
 .history-node { width: 9px; height: 9px; margin-top: 2px; border: 2px solid #c7cbd4; border-radius: 50%; background: #fff; z-index: 1; }
@@ -261,7 +261,7 @@ h3 { margin: 0; color: #343947; font-size: 11px; letter-spacing: -.1px; }
 
 @media (max-width: 1050px) {
 	.admin-shell { grid-template-columns: 220px minmax(0, 1fr); }
-	.topbar, .prototype-banner { padding-left: 22px; padding-right: 22px; }
+	.topbar, .local-git-banner { padding-left: 22px; padding-right: 22px; }
 	.page-body { padding-left: 22px; padding-right: 22px; }
 	.admin-footer { padding-left: 22px; padding-right: 22px; }
 }
@@ -269,7 +269,7 @@ h3 { margin: 0; color: #343947; font-size: 11px; letter-spacing: -.1px; }
 	.admin-shell { grid-template-columns: 185px minmax(0, 1fr); }
 	.sidebar { padding-left: 9px; padding-right: 9px; }
 	.topbar { padding: 0 15px; }
-	.prototype-banner { padding: 7px 15px; }
+	.local-git-banner { padding: 7px 15px; }
 	.page-body { padding: 22px 15px; }
 	.workflow-grid { grid-template-columns: 1fr; }
 	.workflow-card { min-height: 148px; }
@@ -293,8 +293,8 @@ h3 { margin: 0; color: #343947; font-size: 11px; letter-spacing: -.1px; }
 	.local-badge { display: none; }
 	.button { height: 31px; padding: 0 9px; font-size: 8px; gap: 5px; }
 	.topbar .button-primary { max-width: 130px; overflow: hidden; text-overflow: ellipsis; }
-	.prototype-banner { flex-wrap: wrap; gap: 5px 7px; padding: 7px 12px; font-size: 7px; }
-	.prototype-banner button { width: 100%; text-align: left; }
+	.local-git-banner { flex-wrap: wrap; gap: 5px 7px; padding: 7px 12px; font-size: 7px; }
+	.local-git-banner button { width: 100%; text-align: left; }
 	.page-body { padding: 19px 11px; }
 	.page-heading { align-items: flex-start; flex-direction: column; margin-bottom: 17px; }
 	h1 { font-size: 22px; }

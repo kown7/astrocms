@@ -1,11 +1,41 @@
 ---
-import Welcome from '../components/Welcome.astro';
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+const baseUrl = import.meta.env.BASE_URL.endsWith('/') ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
 ---
-
-<Layout>
-	<Welcome />
+<Layout title="A Small Site | Home">
+	<main>
+		<section class="intro">
+			<p class="eyebrow">A small site</p>
+			<h1>Notes, ideas, and updates.</h1>
+			<p>A quiet corner of the web for sharing what’s new and what’s worth remembering.</p>
+		</section>
+		<section aria-labelledby="recent-heading">
+			<h2 id="recent-heading">Recent journal posts</h2>
+			<ul>
+				{posts.map((post) => (
+					<li>
+					<a href={`${baseUrl}journal/${post.data.slug ?? post.id}/`}>{post.data.title}</a>
+					<time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString('en', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+					{post.data.description && <p>{post.data.description}</p>}
+				</li>
+				))}
+			</ul>
+			<a href={`${baseUrl}journal/`}>All journal posts →</a>
+		</section>
+	</main>
 </Layout>
+<style>
+	main { max-width: 58rem; margin: 0 auto; padding: 3rem 1.5rem; color: #172033; font-family: system-ui, sans-serif; }
+	.intro { padding: 2rem 0 3rem; }
+	.eyebrow { color: #64748b; text-transform: uppercase; letter-spacing: .12em; font-size: .8rem; }
+	h1 { max-width: 15ch; font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 1.05; margin: .5rem 0 1rem; }
+	li { list-style: none; padding: 1rem 0; border-top: 1px solid #e5e7eb; }
+	ul { padding: 0; }
+	li a { color: #172033; font-size: 1.25rem; font-weight: 650; }
+	time { display: block; color: #64748b; font-size: .9rem; margin-top: .35rem; }
+</style>

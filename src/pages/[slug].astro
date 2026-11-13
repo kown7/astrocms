@@ -1,0 +1,29 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const reservedSlugs = new Set(['admin', 'journal']);
+  const pages = await getCollection('pages');
+  return pages
+    .filter(({ id }) => !reservedSlugs.has(id) && !id.includes('/'))
+    .map((page) => ({ params: { slug: page.id }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const { Content } = await render(page);
+---
+<Layout title={`${page.data.title} | A Small Site`}>
+	<main>
+		<article>
+			<h1>{page.data.title}</h1>
+			{page.data.description && <p class="description">{page.data.description}</p>}
+			<div class="content"><Content /></div>
+		</article>
+	</main>
+</Layout>
+<style>
+	main { max-width: 46rem; margin: 0 auto; padding: 3rem 1.5rem; color: #172033; font-family: system-ui, sans-serif; line-height: 1.7; }
+	h1 { line-height: 1.1; font-size: clamp(2.4rem, 7vw, 4rem); }
+	.description { color: #64748b; }
+</style>
